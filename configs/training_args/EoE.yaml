@@ -1,0 +1,27 @@
+model_name: "EoE"
+pre_seq_len: 16
+frozen: true
+query_mode: "mahalanobis"
+seed: 2021
+peft_type: "lora"
+augment_type: "all"
+max_expert: -1
+
+default_expert: "task"
+trainer_name: "EoETrainer"
+learning_rate: 5e-4
+classifier_learning_rate: 0.03
+num_train_epochs: 5
+train_batch_size: 32
+debug: false
+device: "cuda:0"
+columns:
+  - "input_ids"
+  - "labels"
+  - "subject_marker_st"
+  - "object_marker_st"
+  - "input_ids_without_marker"
+  - "subject_st"
+  - "subject_ed"
+  - "object_st"
+  - "object_ed"

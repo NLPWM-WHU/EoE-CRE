@@ -1,0 +1,46 @@
+task_args:
+  # Data Arguments
+  task_name: "RelationExtraction"
+  data_path: "datasets"
+  dataset_name: "TACRED"
+  max_seq_length: 256
+  overwrite_cache: False
+  pad_to_max_length: False
+  num_tasks: 10
+  class_per_task: 4
+  model_name_or_path: "<MODEL_PATH>"
+  config_name: "<MODEL_PATH>"
+  tokenizer_name: "<MODEL_PATH>"
+
+training_args:
+  model_name: "SeqFT"
+  trainer_name: "BaseTrainer"
+  use_fast_tokenizer: True
+  output_dir: "outputs"
+  exp_name: null
+  overwrite_output_dir: True
+  seed: 2021
+  device: "cuda:0"
+  debug: False
+  train_batch_size: 32
+  eval_batch_size: 64
+  optim: "adamw"
+  learning_rate: 1e-5
+  classifier_learning_rate: 1e-3
+  num_exp_rounds: 1
+  num_train_epochs: 5
+  max_grad_norm: 10
+  warmup_ratio: 0
+  frozen: False
+
+
+defaults:
+  - _self_
+
+
+hydra:
+  job:
+    name: "test"
+  run:
+    dir: "${training_args.output_dir}/${task_args.dataset_name}_${training_args.model_name}_${training_args.exp_name}_${now:%Y-%m-%d_%H-%M-%S}"
+  output_subdir: "hydra_outputs"

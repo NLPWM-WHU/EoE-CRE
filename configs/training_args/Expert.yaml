@@ -1,0 +1,17 @@
+trainer_name: "ExpertTrainer"
+model_name: "ExpertModel"
+save_model_dir: "./ckpt/"
+# data augmentation (all, no_rel, reverse, none)
+augment_type: "all"
+
+seed: 2021
+num_train_epochs: 10
+
+debug: false
+frozen: false
+
+columns:
+  - "input_ids"
+  - "labels"
+  - "subject_marker_st"
+  - "object_marker_st"
